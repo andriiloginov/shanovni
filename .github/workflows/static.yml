@@ -1,0 +1,54 @@
+# Простий робочий процес для розгортання статичного контенту на GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Запускається при push у гілку main
+  push:
+    branches: ["main"]
+
+  # Дозволяє запускати цей робочий процес вручну з вкладки Actions
+  workflow_dispatch:
+
+# Встановлює дозволи для GITHUB_TOKEN, щоб дозволити розгортання на GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Дозволяє лише одне одночасне розгортання, пропускаючи запуски, що стоять у черзі між поточним і останнім у черзі.
+# Однак, НЕ скасовувати поточні запуски, оскільки ми хочемо, щоб ці продакшн-розгортання завершились.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Єдине завдання розгортання, оскільки ми просто розгортаємо
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout # Клонуємо репозиторій
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js # <--- ДОДАНО: Налаштовуємо Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Використовуємо Node.js версії 20
+
+      - name: Install dependencies # <--- ДОДАНО: Встановлюємо NPM-залежності
+        run: npm install
+
+      - name: Build CSS # <--- ДОДАНО: Запускаємо скрипт для збірки CSS
+        run: npm run build:css
+
+      - name: Upload artifact # Завантажуємо згенерований контент (з папки public)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Завантажуємо вміст папки public, де знаходяться index.html та dist/style.css
+          path: './public' # <--- ЗМІНЕНО ТУТ: Вказуємо папку public
+
+      - name: Deploy to GitHub Pages # Розгортаємо завантажений артефакт
+        id: deployment
+        uses: actions/deploy-pages@v4
