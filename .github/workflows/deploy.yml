@@ -32,22 +32,22 @@ jobs:
       - name: Checkout # Клонуємо репозиторій
         uses: actions/checkout@v4
 
-      - name: Set up Node.js # <--- ДОДАНО: Налаштовуємо Node.js
+      - name: Set up Node.js # Встановлюємо Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20' # Використовуємо Node.js версії 20
 
-      - name: Install dependencies # <--- ДОДАНО: Встановлюємо NPM-залежності
+      - name: Install dependencies # Встановлюємо NPM-залежності (npm install)
         run: npm install
 
-      - name: Build CSS # <--- ДОДАНО: Запускаємо скрипт для збірки CSS
+      - name: Build CSS # Запускаємо скрипт для збірки CSS (npm run build:css)
         run: npm run build:css
 
       - name: Upload artifact # Завантажуємо згенерований контент (з папки public)
         uses: actions/upload-pages-artifact@v3
         with:
           # Завантажуємо вміст папки public, де знаходяться index.html та dist/style.css
-          path: './public' # <--- ЗМІНЕНО ТУТ: Вказуємо папку public
+          path: './public' # ОЦЕ НАЙВАЖЛИВІШЕ: './public' !
 
       - name: Deploy to GitHub Pages # Розгортаємо завантажений артефакт
         id: deployment
