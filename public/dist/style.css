@@ -8,6 +8,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-black: #000;
     --spacing: 0.25rem;
     --container-xs: 20rem;
     --text-xl: 1.25rem;
@@ -15,6 +16,7 @@
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
     --font-weight-bold: 700;
+    --animate-bounce: bounce 1s infinite;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -596,6 +598,32 @@
     grid-column-start: 2;
     grid-row-start: 2;
   }
+  .status {
+    display: inline-block;
+    aspect-ratio: 1 / 1;
+    width: calc(0.25rem * 2);
+    height: calc(0.25rem * 2);
+    border-radius: var(--radius-selector);
+    background-color: var(--color-base-content);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-base-content) 20%, transparent);
+    }
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    color: color-mix(in srgb, #000 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in srgb, #000 30%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, var(--color-black) 30%, transparent);
+      }
+    }
+    background-image: radial-gradient( circle at 35% 30%, oklch(1 0 0 / calc(var(--depth) * 0.5)), #0000 );
+    box-shadow: 0 2px 3px -1px currentColor;
+    @supports (color: color-mix(in lab, red, red)) {
+      box-shadow: 0 2px 3px -1px color-mix(in oklab, currentColor calc(var(--depth) * 100%), #0000);
+    }
+  }
   .navbar {
     display: flex;
     width: 100%;
@@ -658,6 +686,9 @@
   .max-w-xs {
     max-width: var(--container-xs);
   }
+  .animate-bounce {
+    animation: var(--animate-bounce);
+  }
   .items-center {
     align-items: center;
   }
@@ -674,6 +705,10 @@
     font-size: 0.75rem;
     box-shadow: 0 1px 2px 0 oklch(0% 0 0/0.05);
   }
+  .status-info {
+    background-color: var(--color-info);
+    color: var(--color-info);
+  }
   .bg-base-100 {
     background-color: var(--color-base-100);
   }
@@ -682,9 +717,6 @@
   }
   .bg-base-300 {
     background-color: var(--color-base-300);
-  }
-  .bg-primary {
-    background-color: var(--color-primary);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
@@ -1035,6 +1067,16 @@
   syntax: "*";
   inherits: false;
   initial-value: 0 0 #0000;
+}
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
 }
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
