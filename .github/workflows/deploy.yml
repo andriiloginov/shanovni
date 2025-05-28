@@ -37,8 +37,12 @@ jobs:
         with:
           node-version: '20' # Використовуємо Node.js версії 20
 
-      - name: Install dependencies # Встановлюємо NPM-залежності (npm install)
-        run: npm install
+      # Додаємо крок для очищення кешу npm та примусової переінсталяції
+      - name: Clean npm cache and reinstall dependencies
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Build CSS # Запускаємо скрипт для збірки CSS (npm run build:css)
         run: npm run build:css
