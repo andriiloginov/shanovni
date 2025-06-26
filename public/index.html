@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk" data-theme="ligt">
+<html lang="uk" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,24 +8,31 @@
   <style>
     /* Шрифт Geist */
     body {
-      font-family: 'Geist', sans-serif;
+      font-family: "Geist Mono", monospace;
     }
   </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<div class="navbar bg-base-100 shadow-sm">
+<div class="flex justify-center">
 <button class="btn btn-ghost text-xl"><div id="logo_wrapper">
   <a href="index.html"><img src="img/logo.svg" alt="Логотип «Шановних»"></a>
 </div>Шановні</button>
 </div>
 
 <!-- Hero Section -->
-<div class="bg-gray-50 py-24 sm:py-32">
-  <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+<div class="bg-base-100 py-24 sm:py-32">
+  <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8" flex justify-center>
+    <!-- Heading -->
     <h2 class="text-center text-base/7 font-semibold text-gray-400">Читайте між рядків</h2>
-    <p class="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-black sm:text-5xl">Все, щоб сказати: «Агов, депутате!» правильно</p>
+    <p class="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight  sm:text-5xl">Все, щоб сказати: «Агов, депутате!» правильно</p>
+    <br><br>
+    <!-- Button -->
+    <div class="flex justify-center">
+      <a href="https://huggingface.co/spaces/andriiloginov/shabot" class="btn btn-neutral">Бот-перекладач</a>
+    </div>
+    <!-- Bento Grid -->
     <div class="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
       <div class="relative lg:row-span-2">
         <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-4xl"></div>
@@ -84,7 +91,7 @@
                 </div>
               </div>
               <div class="px-6 pt-6 pb-14">
-                <!-- Your code example -->
+                <!-- Code or text example -->
                  Згідно з підпунктом 14.3.1 пункту 14.3 статті 14 Податкового кодексу України, відповідно до Методичних рекомендацій щодо уніфікації процедурного інтерфейсу суб’єкта нормотворчої ініціативи в контексті гармонізації з Єдиним реєстром проєктів нормативно-правових актів, затверджених Постановою Кабінету Міністрів України №834-др від 32 квітня 2011 року, встановлюється порядок погодження погодження погоджень.
               </div>
             </div>
@@ -95,6 +102,11 @@
     </div>
   </div>
 </div>
+
+
+<!-- Bot -->
+
+
 
 <!-- Footer -->
 <footer class="footer sm:footer-horizontal footer-center bg-gray-100 text-base-content p-4">

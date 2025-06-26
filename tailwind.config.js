@@ -11,6 +11,6 @@ module.exports = {
     require('daisyui'),
   ],
   daisyui: {
-    themes: ["retro"],
+    themes: ["retro", "aqua", "light", "dark"], // Add your desired themes here
   },
 };
