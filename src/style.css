@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 @import "tailwindcss";
 @plugin "daisyui" {
   themes: light --lofi, dark --black;
