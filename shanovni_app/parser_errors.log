@@ -1,0 +1,42 @@
+ERROR:root:Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: 403 Client Error: Forbidden for url: https://kmr.gov.ua/uk/users/andronovvladyslav
+2025-07-18 17:24:55,576 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: HTTPSConnectionPool(host='kmr.gov.ua', port=443): Max retries exceeded with url: /uk/users/andronovvladyslav (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)')))
+2025-07-18 17:50:18,204 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: Cannot set verify_mode to CERT_NONE when check_hostname is enabled.
+2025-07-18 18:13:35,435 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: Cannot set verify_mode to CERT_NONE when check_hostname is enabled.
+2025-07-18 18:13:45,526 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: Cannot set verify_mode to CERT_NONE when check_hostname is enabled.
+2025-07-18 18:22:22,784 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: HTTPSConnectionPool(host='kmr.gov.ua', port=443): Max retries exceeded with url: /uk/users/andronovvladyslav (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)')))
+2025-07-18 18:25:05,139 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: HTTPSConnectionPool(host='kmr.gov.ua', port=443): Max retries exceeded with url: /uk/users/andronovvladyslav (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)')))
+2025-07-18 18:27:53,961 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: 403 Client Error: Forbidden for url: https://kmr.gov.ua/uk/users/andronovvladyslav
+2025-07-18 18:37:51,204 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: 403 Client Error: Forbidden for url: https://kmr.gov.ua/uk/users/andronovvladyslav
+2025-07-18 18:42:05,101 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: HTTPSConnectionPool(host='kmr.gov.ua', port=443): Max retries exceeded with url: /uk/users/andronovvladyslav (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)')))
+2025-07-18 18:42:08,378 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: HTTPSConnectionPool(host='kmr.gov.ua', port=443): Max retries exceeded with url: /uk/users/andronovvladyslav (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)')))
+2025-07-21 18:14:19,312 - ERROR - DEBUG: HTML fetched for https://kmr.gov.ua/uk/users/andronovvladyslav, length=226330
+2025-07-21 18:14:19,525 - ERROR - Після парсингу https://kmr.gov.ua/uk/users/andronovvladyslav відсутні поля: bio
+2025-07-21 18:14:19,535 - ERROR - Помилка при збереженні даних для Андронов Владислав Євгенович: NOT NULL constraint failed: officials_official.slug
+2025-07-21 18:17:04,983 - ERROR - DEBUG: HTML fetched for https://kmr.gov.ua/uk/users/andronovvladyslav, length=226330
+2025-07-21 18:17:05,213 - ERROR - Після парсингу https://kmr.gov.ua/uk/users/andronovvladyslav відсутні поля: bio
+2025-08-06 19:06:49,433 - ERROR - Помилка при парсингу https://kmr.gov.ua/uk/users/andronovvladyslav: Message: session not created: cannot connect to chrome at 127.0.0.1:60549
+from session not created: This version of ChromeDriver only supports Chrome version 139
+Current browser version is 138.0.7204.158; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+0   undetected_chromedriver             0x0000000102718e98 undetected_chromedriver + 5918360
+1   undetected_chromedriver             0x000000010271042a undetected_chromedriver + 5882922
+2   undetected_chromedriver             0x00000001021dce20 undetected_chromedriver + 429600
+3   undetected_chromedriver             0x000000010221e13d undetected_chromedriver + 696637
+4   undetected_chromedriver             0x000000010221d134 undetected_chromedriver + 692532
+5   undetected_chromedriver             0x000000010221240d undetected_chromedriver + 648205
+6   undetected_chromedriver             0x0000000102263307 undetected_chromedriver + 979719
+7   undetected_chromedriver             0x0000000102262996 undetected_chromedriver + 977302
+8   undetected_chromedriver             0x0000000102254ce3 undetected_chromedriver + 920803
+9   undetected_chromedriver             0x000000010222129b undetected_chromedriver + 709275
+10  undetected_chromedriver             0x0000000102221f81 undetected_chromedriver + 712577
+11  undetected_chromedriver             0x00000001026d5ba0 undetected_chromedriver + 5643168
+12  undetected_chromedriver             0x00000001026d9a54 undetected_chromedriver + 5659220
+13  undetected_chromedriver             0x00000001026b1412 undetected_chromedriver + 5493778
+14  undetected_chromedriver             0x00000001026da4ff undetected_chromedriver + 5661951
+15  undetected_chromedriver             0x00000001026a03b4 undetected_chromedriver + 5424052
+16  undetected_chromedriver             0x00000001026fd718 undetected_chromedriver + 5805848
+17  undetected_chromedriver             0x00000001026fd8e0 undetected_chromedriver + 5806304
+18  undetected_chromedriver             0x0000000102710001 undetected_chromedriver + 5881857
+19  libsystem_pthread.dylib             0x00007ff811dcadf1 _pthread_start + 99
+20  libsystem_pthread.dylib             0x00007ff811dc6857 thread_start + 15
+

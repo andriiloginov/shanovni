@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            Django App
+        {% endblock %}
+    </title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+  <card>
+    <div class="flex flex-col grid p-5 gap-5 items-start justify-start absolute top-[268px] left-[135px] size-max bg-[#cbd2b7] rounded-md">
+      <img src="https://picsum.photos/88/88" class="relative size-[88px]"/>
+        <div class="flex flex-col grid gap-[6px] items-start justify-start size-max">
+          <div class="flex grid p-[6px] gap-[6px] items-start justify-start w-max h-[86px]">
+            <div class="text-black text-[32px] leading-[1.2] relative w-[278px] h-[86px]">
+              Бондарченко Сергій
+            </div>
+          </div>
+          <div class="flex grid py-[6px] px-3 gap-[6px] items-start justify-start size-max bg-[#f1f1ef]">
+            <div class="text-black text-sm leading-[1.2] relative">
+              Партія «Врємя і Стікло»
+            </div>
+          </div>
+          <div class="flex grid py-[6px] px-3 gap-[6px] items-start justify-start size-max bg-[#f1f1ef]">
+            <div class="text-black text-sm leading-[1.2] relative">
+              bondarengo_serhii@mail.cov.ua
+            </div>
+          </div>
+        </div>
+          <div class="flex grid items-start justify-start w-[281px] h-max">
+            <div class="text-black font-medium text-sm leading-[1.2] relative w-[278px]">
+              Олександр Погребняк, яскравий представник Партії «Світло та Добро», присвятив своє життя служінню суспільству. Народившись у невеликому містечку на Полтавщині, він з дитинства виявив неабиякі лідерські якості та прагнення до справедливості. Здобувши юридичну освіту, Олександр успішно працював у сфері захисту прав людини, де здобув репутацію принципового та безкомпромісного борця за інтереси простих громадян.
+            </div>
+          </div>
+        </div>
+    </card>
+</body>
+
+</html>

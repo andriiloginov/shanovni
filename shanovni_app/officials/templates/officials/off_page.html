@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {{ official.name }}
+{% endblock %}
+
+{% block content %}
+  <section>
+  <h1>{{ official.name }}</h1>
+    <p>{{ official.institution_name }}</p>
+    <p>{{ official.bio }}</p>
+    <p>{{ official.slug }}</p>
+  </section>
+{% endblock %}

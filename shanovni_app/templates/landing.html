@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="uk" data-theme="light">
+{% load static %}
+<html lang="uk" data-theme="retro">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Шановні: Головна сторінка</title>
-  <link href="dist/style.css" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
   <style>
     /* Шрифт Geist */
     body {
-      font-family: "Geist", monospace;
+      font-family: 'Geist', sans-serif;
     }
   </style>
 </head>
@@ -17,7 +18,7 @@
 <!-- Navbar -->
 <div class="flex justify-center">
 <button class="btn btn-ghost text-xl"><div id="logo_wrapper">
-  <a href="index.html"><img src="img/logo.svg" alt="Логотип «Шановних»"></a>
+  <a href="home.html"><img src="static/img/logo.svg" alt="Логотип «Шановних»"></a>
 </div>Шановні</button>
 </div>
 
@@ -31,7 +32,7 @@
     <br><br>
     <!-- Button -->
     <div class="flex justify-center">
-      <a href="https://huggingface.co/spaces/andriiloginov/shabot" class="btn btn-neutral">Бот-перекладач</a>
+      <a href="https://huggingface.co/spaces/andriiloginov/shabot" class="btn btn-primary">Бот-перекладач</a>
     </div>
     <!-- Bento Grid -->
     <div class="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
@@ -44,7 +45,7 @@
           </div>
           <div class="@container relative min-h-120 w-full grow max-lg:mx-auto max-lg:max-w-sm">
             <div class="absolute inset-x-10 top-10 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-300 bg-gray-200 shadow-2xl">
-              <img class="size-full object-cover object-top" src="img/app-preview.png" alt="">
+              <img class="size-full object-cover object-top" src="static/img/app-preview.png" alt="">
             </div>
           </div>
         </div>
@@ -58,7 +59,7 @@
             <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Слідкуй за рішеннями, голосуваннями та темами, які тобі близькі.</p>
           </div>
           <div class="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
-            <img class="w-full max-lg:max-w-xs" src="img/app-vote.png" alt="">
+            <img class="w-full max-lg:max-w-xs" src="static/img/app-vote.png" alt="">
           </div>
         </div>
         <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-4xl"></div>
@@ -71,7 +72,7 @@
             <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Усе ще не знаєш, що вирішили за тебе? Це вже не відмазка.</p>
           </div>
           <div class="@container flex flex-1 items-center max-lg:py-6 lg:pb-2">
-            <img class="h-[min(152px,40cqw)] object-cover" src="img/wake-app.png" alt="">
+            <img class="h-[min(152px,40cqw)] object-cover" src="static/img/wake-app.png" alt="">
           </div>
         </div>
         <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5"></div>
@@ -106,8 +107,6 @@
 
 
 <!-- Bot -->
-
-
 
 <!-- Footer -->
 <footer class="footer sm:footer-horizontal footer-center bg-gray-100 text-base-content p-4">

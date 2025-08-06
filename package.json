@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:css": "postcss src/style.css -o public/dist/style.css",
-    "watch:css": "postcss src/style.css -o public/dist/style.css --watch",
+    "build:css": "postcss src/style.css -o shanovni_app/static/css/style.css",
+    "watch:css": "postcss src/style.css -o shanovni_app/static/css/style.css --watch",
     "dev": "npm run watch:css"
   },
   "keywords": [],

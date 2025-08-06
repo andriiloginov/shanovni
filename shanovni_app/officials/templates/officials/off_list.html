@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Officials
+{% endblock %}
+
+{% block content %}
+    <section>
+    <h1>Officials</h1>
+
+    {% for official in officials %}
+        <article class="card">
+            <h2>
+                <a href="{% url 'officials:official' slug=official.slug %}">{{ official.name }}</a>
+                    {{ official.name }}
+                </a>
+            </h2>
+            <p>{{ official.institution_name }}</p>
+            <p>{{ official.bio }}</p>
+            <p>{{ official.term_start }}</p>
+        </article>
+    {% endfor %}
+</section>
+{% endblock %}
