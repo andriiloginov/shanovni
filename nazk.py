@@ -20,6 +20,7 @@ def search_declarations(query: str) -> list[dict]:
             timeout=15,
         )
         if r.status_code != 200:
+            st.warning(f"НАЗК API: статус {r.status_code} для {NAZK_API}/documents/list")
             return []
 
         data = r.json()
