@@ -38,4 +38,4 @@ ANTHROPIC_API_KEY = "your-api-key"
 
 ## Стек
 
-Streamlit · pandas · Claude API (Anthropic) · pypdf · data.gov.ua
+Streamlit, pandas, Claude API (Anthropic), pypdf, data.gov.ua
