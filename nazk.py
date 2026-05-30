@@ -3,8 +3,8 @@ nazk.py — інтеграція з Public API НАЗК (public-api.nazk.gov.ua/
 Кешується на 24 год. Використання: from nazk import show_declaration
 """
 
-import requests
 import streamlit as st
+from curl_cffi import requests
 from data import UA, NAZK_API, NAZK_PUBLIC
 from utils import get_badge
 
@@ -18,6 +18,7 @@ def search_declarations(query: str) -> list[dict]:
             params={"query": query},
             headers=UA,
             timeout=15,
+            impersonate="chrome",
         )
         if r.status_code != 200:
             st.warning(f"НАЗК API: статус {r.status_code} для {NAZK_API}/documents/list")
@@ -56,6 +57,7 @@ def load_declaration(doc_id: str) -> dict:
             f"{NAZK_API}/documents/{doc_id}",
             headers=UA,
             timeout=15,
+            impersonate="chrome",
         )
         if r.status_code != 200:
             return {}
