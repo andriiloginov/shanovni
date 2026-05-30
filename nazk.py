@@ -8,7 +8,7 @@ import streamlit as st
 from data import UA
 from utils import get_badge
 
-NAZK_API = "https://public-api.nazk.gov.ua/v2"
+NAZK_API = "https://shanovni-nazk.andrii-loginov.workers.dev"
 NAZK_PUBLIC = "https://public.nazk.gov.ua/documents"
 
 
@@ -23,7 +23,6 @@ def search_declarations(query: str) -> list[dict]:
             timeout=15,
         )
         if r.status_code != 200:
-            st.warning(f"НАЗК API: статус {r.status_code}")
             return []
 
         data = r.json()
