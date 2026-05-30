@@ -1,4 +1,7 @@
-requests>=2.31.0
-beautifulsoup4>=4.12.3
-cloudscraper>=1.2.71
-certifi>=2023.7.22
+streamlit==1.55.0
+anthropic==0.104.1
+pandas==2.3.2
+requests==2.32.3
+openpyxl==3.1.3
+pypdf==5.4.0
+plotly==6.7.0
