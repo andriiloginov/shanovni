@@ -1,6 +1,9 @@
 # Secrets
 .streamlit/secrets.toml
 
+# Claude Code
+.claude/
+
 # Virtual environment
 .venv/
 
