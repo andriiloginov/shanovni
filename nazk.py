@@ -21,7 +21,6 @@ def search_declarations(query: str) -> list[dict]:
             impersonate="chrome",
         )
         if r.status_code != 200:
-            st.warning(f"НАЗК API: статус {r.status_code} для {NAZK_API}/documents/list")
             return []
 
         data = r.json()
@@ -134,7 +133,11 @@ def show_declaration(full_name: str, deputy_row=None):
         )
 
     if not declarations:
-        st.caption("Декларацію не знайдено в реєстрі НАЗК.")
+        parts = full_name.split()
+        search_query = f"{parts[0]} {parts[1]}" if len(parts) >= 2 else full_name
+        nazk_url = f"https://public.nazk.gov.ua/documents/list?query={search_query.replace(' ', '+')}"
+        st.caption("Не вдалось завантажити автоматично.")
+        st.link_button("Шукати в реєстрі НАЗК ↗", nazk_url, use_container_width=True)
         return
 
     # Вибір року якщо є кілька декларацій
