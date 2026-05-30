@@ -21,9 +21,11 @@ def search_declarations(query: str) -> list[dict]:
             timeout=15,
         )
         if r.status_code != 200:
+            st.warning(f"НАЗК {r.status_code}: {r.text[:300]}")
             return []
 
         data = r.json()
+        st.info(f"НАЗК OK: query={query!r}, count={data.get('count')}")
         results = []
 
         for doc in data.get("data", []):
