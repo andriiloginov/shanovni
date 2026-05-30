@@ -5,11 +5,8 @@ nazk.py — інтеграція з Public API НАЗК (public-api.nazk.gov.ua/
 
 import requests
 import streamlit as st
-from data import UA
+from data import UA, NAZK_API, NAZK_PUBLIC
 from utils import get_badge
-
-NAZK_API = "https://shanovni-nazk.andrii-loginov.workers.dev"
-NAZK_PUBLIC = "https://public.nazk.gov.ua/documents"
 
 
 @st.cache_data(ttl=86400, show_spinner=False)

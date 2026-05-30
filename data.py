@@ -24,6 +24,10 @@ SALARIES_URL = "https://data.gov.ua/dataset/0272e07e-53f7-4a93-ab21-5a227c6ca59c
 
 ASSISTANT_SYSTEM_PROMPT = Path("prompts/assistant.md").read_text(encoding="utf-8")
 
+# НАЗК — декларації
+NAZK_API = "https://shanovni-nazk.andrii-loginov.workers.dev"
+NAZK_PUBLIC = "https://public.nazk.gov.ua/documents"
+
 SALARY_COMPONENTS = {
     "basePay": "Оклад",
     "seniorityAllowance": "Вислуга років",
