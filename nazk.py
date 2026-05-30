@@ -134,7 +134,7 @@ def show_declaration(full_name: str, deputy_row=None):
     if not declarations:
         parts = full_name.split()
         search_query = f"{parts[0]} {parts[1]}" if len(parts) >= 2 else full_name
-        nazk_url = f"https://public.nazk.gov.ua/documents/list?query={quote_plus(search_query)}"
+        nazk_url = f"https://public.nazk.gov.ua/documents/list?q={quote_plus(search_query)}"
         st.caption("Не вдалось завантажити автоматично.")
         st.link_button("Шукати в реєстрі НАЗК ↗", nazk_url, use_container_width=True)
         return
