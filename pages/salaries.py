@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from utils import load_salaries, render_data_footer
-from data import SALARY_COMPONENTS, SALARIES_URL
+from data import SALARY_COMPONENTS, CITIES
 
 salaries_df = load_salaries()
 
@@ -9,8 +9,8 @@ if salaries_df.empty:
     st.error("Не вдалося завантажити дані з data.gov.ua — портал може бути тимчасово недоступний. Спробуйте пізніше.")
     st.stop()
 
-st.title("Зарплати керівництва КМДA")
-st.subheader("Нараховані виплати міському голові та заступникам голови КМДA за видами оплат")
+st.header("Зарплати менеджменту КМДA")
+st.caption("Нараховані виплати міському голові та його заступникам")
 
 # --- Фільтри ---
 
@@ -149,4 +149,4 @@ if spike_items:
         else:
             col.metric(label, value)
 
-render_data_footer({"Зарплати керівництва КМДА": SALARIES_URL})
+render_data_footer({"Зарплати керівництва КМДА": CITIES["kyiv"]["salaries_url"]})

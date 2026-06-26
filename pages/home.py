@@ -1,25 +1,13 @@
 import streamlit as st
 
 # Гіро секція
-st.title("Вітаємо на Shanovni.org")
-st.subheader("Тут ти можеш перевірити, як голосують обрані тобою менеджери, розібратися з їхніми рішеннями, законопроєктами та ініціативами й подивитись декларації або зарплатні звітності")
-
-# Кнопки для швидкого переходу
-col_btn1, col_btn2, col_btn3, _ = st.columns([1, 1, 1, 1])
-with col_btn1:
-    if st.button("Депутати", use_container_width=True):
-        st.switch_page("pages/reps.py")
-with col_btn2:
-    if st.button("Голосування", use_container_width=True):
-        st.switch_page("pages/voting.py")
-with col_btn3:
-    if st.button("Зарплати", use_container_width=True):
-        st.switch_page("pages/salaries.py")
+st.header("Вітаємо на Shanovni.org")
+st.caption("Тут ти можеш перевірити, які рішенняприймають обрані тобою менеджери, краще зрозуміти законопроєктами та ініціативами, декларації або зарплатні звітності")
 
 st.divider()
 
 # Проблеми
-st.markdown("### Проблеми")
+st.markdown("### Проблеми, які ми бачимо")
 
 PROBLEMS = [
     ("Закритість", "Дані існують, але вони приховані у незручних форматах та застарілих сайтах."),
@@ -41,7 +29,7 @@ for i in range(0, len(PROBLEMS), 3):
 st.divider()
 
 # Рішення
-st.markdown("### Рішення")
+st.markdown("### Готові рішення та роадмап")
 
 SOLUTIONS = [
     ("В процесі", "Підзвітність, якої ви варті", "Ви точно знаєте, як ваш депутат голосував за важливі для міста питання."),

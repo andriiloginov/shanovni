@@ -15,8 +15,8 @@ def search_declarations(query: str) -> list[dict]:
     """Пошук декларацій за ПІБ."""
     try:
         r = requests.get(
-            f"{NAZK_API}/documents/list",
-            params={"query": query},
+            NAZK_API,
+            params={"path": "documents/list", "query": query},
             headers=UA,
             timeout=15,
         )
@@ -53,7 +53,8 @@ def load_declaration(doc_id: str) -> dict:
     """Завантажує повну декларацію за uuid, повертає структурований dict."""
     try:
         r = requests.get(
-            f"{NAZK_API}/documents/{doc_id}",
+            NAZK_API,
+            params={"path": f"documents/{doc_id}"},
             headers=UA,
             timeout=15,
         )
@@ -95,22 +96,7 @@ def get_deputy_declarations(full_name: str) -> tuple[list[dict], dict]:
     return declarations, latest_parsed
 
 
-def build_llm_context(deputy_row, declarations: list[dict], parsed: dict) -> dict:
-    """Збирає контекст депутата для LLM-сайдбару (session_state)."""
-    return {
-        "name": getattr(deputy_row, "name", ""),
-        "party": getattr(deputy_row, "party", ""),
-        "district": getattr(deputy_row, "district", ""),
-        "phone": getattr(deputy_row, "phone", ""),
-        "address": getattr(deputy_row, "address", ""),
-        "declarations_count": len(declarations),
-        "declaration_years": [d["year"] for d in declarations],
-        "declaration_urls": {d["year"]: d["url"] for d in declarations},
-        "declaration": parsed,   # повний структурований dict останньої декларації
-    }
-
-
-def show_declaration(full_name: str, deputy_row=None):
+def show_declaration(full_name: str):
     """Секція «Декларація» з lazy-завантаженням з НАЗК."""
     state_key = f"decl_loaded_{full_name}"
 
@@ -124,12 +110,6 @@ def show_declaration(full_name: str, deputy_row=None):
     # Дані завантажуються тільки після кліку (кешуються на 24 год)
     with st.spinner("Шукаємо декларації..."):
         declarations, parsed = get_deputy_declarations(full_name)
-
-    # Оновлюємо LLM-контекст якщо є рядок депутата
-    if deputy_row is not None and parsed:
-        st.session_state["deputy_context"] = build_llm_context(
-            deputy_row, declarations, parsed
-        )
 
     if not declarations:
         parts = full_name.split()

@@ -435,10 +435,10 @@ headingFont = "FixelDisplay"
 # codeFontWeight =
 
 # The radius used as basis for the corners of most UI elements.
-baseRadius = "0.25rem"
+baseRadius = "0.75rem"
 
 # The radius used as basis for the corners of buttons.
-buttonRadius = "0.25rem"
+buttonRadius = "0.75rem"
 
 # The color of the border around elements.
 borderColor = "#cecece"

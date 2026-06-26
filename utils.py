@@ -3,8 +3,10 @@ import pandas as pd
 import requests
 import io
 import streamlit as st
-from data import DEPUTIES_URL, SALARIES_URL, UA, SALARY_COMPONENTS
-from ui import PARTY_COLORS
+from data import CITIES, UA, SALARY_COMPONENTS
+
+_kyiv = CITIES["kyiv"]
+from ui import LABEL_COLORS
 
 PARTY_MAP = {
     "удар": "УДАР",
@@ -72,7 +74,7 @@ def deputy_avatar(deputy_id: int, name: str, party: str = "", size: int = 80):
     url = get_photo_url(deputy_id)
     parts = str(name).split()
     initials = (parts[0][0] + parts[1][0]).upper() if len(parts) >= 2 else parts[0][0].upper()
-    color = PARTY_COLORS.get(party, "#757575")
+    color = LABEL_COLORS.get(party, "#757575")
     use_photo = url and _is_image_available(url)
     if use_photo:
         st.markdown(
@@ -102,7 +104,7 @@ def get_badge(text, color="#757575"):
 
 def get_party_badge(party):
     """HTML-бейдж фракції з кольором партії."""
-    color = PARTY_COLORS.get(party, "#757575")
+    color = LABEL_COLORS.get(party, "#757575")
     return get_badge(party, color)
 
 
@@ -146,7 +148,7 @@ def geocode_postal_code(postal_code):
 def load_deputies():
     """Завантажує список депутатів Київради з data.gov.ua, кешує на 24 год. Використовується в reps.py, voting.py."""
     try:
-        r = requests.get(DEPUTIES_URL, headers=UA, timeout=20)
+        r = requests.get(_kyiv["deputies_url"], headers=UA, timeout=20)
         df = pd.read_excel(io.BytesIO(r.content), header=1)
         df = df.dropna(subset=['ПІБ']).rename(columns={
             '№ з/п': 'id', 'ПІБ': 'name', 'Фракція': 'party',
@@ -173,7 +175,7 @@ def render_data_footer(sources):
 @st.cache_data(ttl=86400)
 def load_salaries():
     try:
-        r = requests.get(SALARIES_URL, headers=UA, timeout=20)
+        r = requests.get(_kyiv["salaries_url"], headers=UA, timeout=20)
         df = pd.read_csv(io.StringIO(r.text))
         df['employeeName'] = (
             df['employeeName']

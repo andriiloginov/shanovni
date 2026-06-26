@@ -2,7 +2,7 @@ import re
 import streamlit as st
 from urllib.parse import quote
 from utils import load_deputies, get_party_badge, geocode_postal_code, render_data_footer, deputy_avatar
-from data import DEPUTIES_URL
+from data import CITIES
 from nazk import show_declaration
 from ui import get_card_marker
 
@@ -13,8 +13,8 @@ if reps_df.empty:
     st.stop()
 
 # Заголовок сторінки
-st.title("Склад Київської міської ради")
-st.subheader("Склад ради, контактні дані депутатів, їхні декларації пошук за індексом дільниці та інша корисна інформація для виборців")
+st.header("Склад міської ради поточного скликання")
+st.caption("Склад ради, контактні дані депутатів, їхні декларації пошук за індексом дільниці та інша корисна інформація для виборців")
 
 # Фільтри
 col_search, col_filter, col_zip = st.columns([2, 3, 2])
@@ -96,8 +96,8 @@ if not filtered_df.empty:
                     st.caption(
                         "Дані завантажуються напряму з реєстру НАЗК в реальному часі, тому аби не було затримок, ми показуємо лише основну інформацію. "
                     )
-                    show_declaration(dep.name, dep)
+                    show_declaration(dep.name)
 else:
     st.info("Представників за вашим запитом не знайдено. Спробуйте змінити параметри фільтрації.")
 
-render_data_footer({"Депутати Київради": DEPUTIES_URL})
+render_data_footer({"Депутати Київради": CITIES["kyiv"]["deputies_url"]})
