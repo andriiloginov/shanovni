@@ -69,7 +69,6 @@ def _is_image_available(url: str) -> bool:
 
 def deputy_avatar(deputy_id: int, name: str, party: str = "", size: int = 80):
     """Аватарка депутата: фото якщо є в DEPUTY_PHOTOS, інакше — ініціали."""
-    import streamlit as st
     from photos import get_photo_url
     url = get_photo_url(deputy_id)
     parts = str(name).split()

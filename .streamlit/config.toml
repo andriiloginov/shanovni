@@ -79,7 +79,7 @@
 # If there are no options left, hide the menu.
 # 
 # Default: "auto"
-# toolbarMode = "auto"
+toolbarMode = "developer"
 
 # Controls whether to display the default sidebar page navigation in a
 # multi-page app. This only applies when app's pages are defined by the
@@ -353,108 +353,11 @@ enableStaticServing = true
 
 
 [theme]
-
-# The preset Streamlit theme that your custom theme inherits from.
-# 
-# This can be one of the following: "light" or "dark".
-# base =
-
-# Primary accent color.
-primaryColor = "#202020"
-
-# Background color of the app.
-backgroundColor = "#fcfcfc"
-
-# Background color used for most interactive widgets.
-secondaryBackgroundColor = "#f0f0f0"
-
-# Color used for almost all text.
-textColor = "#202020"
-
-# Red color used in the basic color palette.
-# redColor =
-
-# Orange color used in the basic color palette.
-# orangeColor =
-
-# Yellow color used in the basic color palette.
-# yellowColor =
-
-# Blue color used in the basic color palette.
-# blueColor =
-
-# Green color used in the basic color palette.
-# greenColor =
-
-# Violet color used in the basic color palette.
-# violetColor =
-
-# Gray color used in the basic color palette.
-# grayColor =
-
-# redBackgroundColor =
-# orangeBackgroundColor =
-# yellowBackgroundColor =
-# blueBackgroundColor =
-# greenBackgroundColor =
-# violetBackgroundColor =
-# grayBackgroundColor =
-# redTextColor =
-# orangeTextColor =
-# yellowTextColor =
-# blueTextColor =
-# greenTextColor =
-# violetTextColor =
-# grayTextColor =
-
-# Color used for all links.
-linkColor = "#202020"
-
-# Whether or not links should be displayed with an underline.
-# linkUnderline =
-
-# Background color used for code blocks.
-codeBackgroundColor = "#f0f0f0"
-
-# The font family for all text, except code blocks.
 font = "FixelText"
-
-# The root font size (in pixels) for the app.
-# baseFontSize =
-
-# The root font weight for the app.
-# baseFontWeight =
-
-# The font family to use for headings.
 headingFont = "FixelDisplay"
-
-# headingFontSizes =
-# headingFontWeights =
-# codeFont =
-# codeFontSize =
-# codeFontWeight =
-
-# The radius used as basis for the corners of most UI elements.
 baseRadius = "0.75rem"
-
-# The radius used as basis for the corners of buttons.
 buttonRadius = "0.75rem"
-
-# The color of the border around elements.
-borderColor = "#cecece"
-
-# The color of the border around dataframes and tables.
-dataframeBorderColor = "#e8e8e8"
-
-# The background color of the dataframe's header.
-dataframeHeaderBackgroundColor = "#e0e0e0"
-
-# Whether to show a border around input widgets.
 showWidgetBorder = true
-
-# showSidebarBorder =
-# chartCategoricalColors =
-# chartSequentialColors =
 
 [[theme.fontFaces]]
 family = "FixelText"
@@ -504,77 +407,48 @@ url = "app/static/fonts/FixelDisplay-Bold.woff2"
 weight = "700"
 style = "normal"
 
-
-[theme.sidebar]
-
-# Primary accent color.
+[theme.light]
 primaryColor = "#202020"
-
-# Background color of the app.
-backgroundColor = "#e0e0e0"
-
-# Background color used for most interactive widgets.
-secondaryBackgroundColor = "#cecece"
-
-# Color used for almost all text.
+backgroundColor = "#fcfcfc"
+secondaryBackgroundColor = "#f0f0f0"
 textColor = "#202020"
-
-# redColor =
-# orangeColor =
-# yellowColor =
-# blueColor =
-# greenColor =
-# violetColor =
-# grayColor =
-# redBackgroundColor =
-# orangeBackgroundColor =
-# yellowBackgroundColor =
-# blueBackgroundColor =
-# greenBackgroundColor =
-# violetBackgroundColor =
-# grayBackgroundColor =
-# redTextColor =
-# orangeTextColor =
-# yellowTextColor =
-# blueTextColor =
-# greenTextColor =
-# violetTextColor =
-# grayTextColor =
-
-# Color used for all links.
 linkColor = "#202020"
-
-# Whether or not links should be displayed with an underline.
-# linkUnderline =
-
-# Background color used for code blocks.
 codeBackgroundColor = "#f0f0f0"
-
-# The font family for all text, except code blocks.
-font = "FixelText"
-
-# The font family to use for headings.
-headingFont = "FixelDisplay"
-
-# headingFontSizes =
-# headingFontWeights =
-# codeFont =
-# codeFontSize =
-# codeFontWeight =
-# baseRadius =
-# buttonRadius =
-
-# The color of the border around elements.
 borderColor = "#cecece"
-
-# The color of the border around dataframes and tables.
 dataframeBorderColor = "#e8e8e8"
-
-# The background color of the dataframe's header.
 dataframeHeaderBackgroundColor = "#e0e0e0"
 
-# Whether to show a border around input widgets.
-showWidgetBorder = true
+[theme.light.sidebar]
+primaryColor = "#202020"
+backgroundColor = "#e0e0e0"
+secondaryBackgroundColor = "#cecece"
+textColor = "#202020"
+linkColor = "#202020"
+codeBackgroundColor = "#f0f0f0"
+borderColor = "#cecece"
+dataframeBorderColor = "#e8e8e8"
+dataframeHeaderBackgroundColor = "#d4d4d4"
+
+[theme.dark]
+primaryColor = "#c4c4c4"
+backgroundColor = "#202020"
+secondaryBackgroundColor = "#2a2a2a"
+textColor = "#fcfcfc"
+linkColor = "#fcfcfc"
+codeBackgroundColor = "#2a2a2a"
+borderColor = "#3a3a3a"
+dataframeBorderColor = "#2a2a2a"
+dataframeHeaderBackgroundColor = "#333333"
+
+[theme.dark.sidebar]
+backgroundColor = "#181818"
+secondaryBackgroundColor = "#252525"
+textColor = "#fcfcfc"
+linkColor = "#fcfcfc"
+codeBackgroundColor = "#2a2a2a"
+borderColor = "#3a3a3a"
+dataframeBorderColor = "#2a2a2a"
+dataframeHeaderBackgroundColor = "#333333"
 
 
 

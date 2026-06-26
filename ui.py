@@ -33,45 +33,24 @@ EMPTY_VOTE_MESSAGES = {
 # --- CSS ---
 
 
-def _party_card_css() -> str:
+_COL = '[data-testid="stColumn"] [data-testid="stLayoutWrapper"]>[data-testid="stVerticalBlock"]'
+
+
+def _colored_card_css(items: list[tuple[str, str]]) -> str:
+    rules = []
+    for cls, color in items:
+        rules.append(f'{_COL}:has(.{cls}){{border:none !important;background:{color}18 !important;border-radius:12px !important;}}')
+    return "".join(rules)
+
+
+def _party_inner_css() -> str:
     rules = []
     for color in LABEL_COLORS.values():
         cid = color.replace("#", "")
         rules.append(
-            f'[data-testid="stColumn"] [data-testid="stLayoutWrapper"]>'
-            f'[data-testid="stVerticalBlock"]:has(.pc-{cid})'
-            f'{{border:none !important;background:{color}18 !important;border-radius:12px !important;}}'
+            f'{_COL}:has(.pc-{cid}) [data-testid="stLayoutWrapper"]>[data-testid="stVerticalBlock"]'
+            f'{{border:none !important;background:{color}14 !important;border-radius:8px !important;padding:0.5rem !important;}}'
         )
-        rules.append(
-            f'[data-testid="stColumn"] [data-testid="stLayoutWrapper"]>'
-            f'[data-testid="stVerticalBlock"]:has(.pc-{cid}) '
-            f'[data-testid="stLayoutWrapper"]>[data-testid="stVerticalBlock"]'
-            f'{{border:none !important;background:{color}14 !important;border-radius:8px !important;'
-            f'padding:0.5rem !important;}}'
-        )
-    return "".join(rules)
-
-
-def _vote_card_css() -> str:
-    rules = []
-    for vote, color in VOTE_COLORS.items():
-        cid = vote.replace(" ", "-")
-        rules.append(
-            f'[data-testid="stColumn"] [data-testid="stLayoutWrapper"]>'
-            f'[data-testid="stVerticalBlock"]:has(.vc-{cid})'
-            f'{{border:none !important;background:{color}18 !important;border-radius:12px !important;}}'
-        )
-    # Voting list cards
-    rules.append(
-        '[data-testid="stColumn"] [data-testid="stLayoutWrapper"]>'
-        '[data-testid="stVerticalBlock"]:has(.vl-p)'
-        '{border:none !important;background:#46A75818 !important;border-radius:12px !important;}'
-    )
-    rules.append(
-        '[data-testid="stColumn"] [data-testid="stLayoutWrapper"]>'
-        '[data-testid="stVerticalBlock"]:has(.vl-f)'
-        '{border:none !important;background:#E93D8218 !important;border-radius:12px !important;}'
-    )
     return "".join(rules)
 
 
@@ -80,7 +59,10 @@ def get_voting_list_marker(passed: bool) -> str:
 
 
 def get_all_css() -> str:
-    return f"<style>{_party_card_css()}{_vote_card_css()}</style>"
+    party_items = [(f'pc-{c.replace("#","")}', c) for c in LABEL_COLORS.values()]
+    vote_items = [(f'vc-{v.replace(" ","-")}', c) for v, c in VOTE_COLORS.items()]
+    vl_items = [("vl-p", "#46A758"), ("vl-f", "#E93D82")]
+    return f"<style>{_colored_card_css(party_items + vote_items + vl_items)}{_party_inner_css()}</style>"
 
 
 def get_card_marker(party: str) -> str:

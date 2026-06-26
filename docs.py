@@ -97,24 +97,16 @@ def _doc_content(doc_url: str, prompt: str) -> list | str:
 
 
 def build_api_messages(messages: list, doc_url: str | None) -> list:
-    """Перетворює внутрішній формат повідомлень у формат Anthropic API. PDF прикріплюється base64 до першого user-повідомлення."""
-    result = []
-    for i, msg in enumerate(messages):
-        if msg["role"] == "user" and i == 0 and doc_url and _is_doc_url(doc_url):
-            pdf_bytes = fetch_pdf_bytes(doc_url)
-            if pdf_bytes:
-                result.append({"role": "user", "content": [
-                    {
-                        "type": "document",
-                        "source": {"type": "base64", "media_type": "application/pdf",
-                                   "data": base64.standard_b64encode(pdf_bytes).decode()},
-                        "cache_control": {"type": "ephemeral"},
-                    },
-                    {"type": "text", "text": msg["text"]},
-                ]})
-                continue
-        result.append({"role": msg["role"], "content": msg["text"]})
-    return result
+    """PDF прикріплюється до першого user-повідомлення, решта — plain text."""
+    pdf_bytes = fetch_pdf_bytes(doc_url) if doc_url and _is_doc_url(doc_url) else None
+    first, *rest = messages
+    first_content = (
+        [{"type": "document", "source": {"type": "base64", "media_type": "application/pdf",
+           "data": base64.standard_b64encode(pdf_bytes).decode()}, "cache_control": {"type": "ephemeral"}},
+         {"type": "text", "text": first["text"]}]
+        if pdf_bytes else first["text"]
+    )
+    return [{"role": first["role"], "content": first_content}] + [{"role": m["role"], "content": m["text"]} for m in rest]
 
 
 @st.cache_data(ttl=86400, show_spinner=False)

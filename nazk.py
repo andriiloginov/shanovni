@@ -193,13 +193,8 @@ def show_declaration(full_name: str):
 
 
 def _get_step(data: dict, step_num: int) -> list:
-    step = data.get(f"step_{step_num}", {})
-    if isinstance(step, dict):
-        result = step.get("data", []) or []
-        if isinstance(result, dict):
-            return [result]
-        return result
-    return []
+    result = (data.get(f"step_{step_num}") or {}).get("data") or []
+    return [result] if isinstance(result, dict) else result
 
 
 def _parse_meta(raw: dict, data: dict) -> dict:
@@ -218,75 +213,50 @@ def _parse_meta(raw: dict, data: dict) -> dict:
     }
 
 
+def _uk(obj, key):
+    v = obj.get(key)
+    return v.get("ukName", "") if isinstance(v, dict) else ""
+
+
+def _code(obj, key):
+    v = obj.get(key)
+    return v.get("code", "UAH") if isinstance(v, dict) else "UAH"
+
+
 def _parse_realty(data: dict) -> list:
-    result = []
-    for obj in _get_step(data, 3):
-        result.append({
-            "type": obj.get("objectType", ""),
-            "area": obj.get("totalArea", ""),
-            "country": obj.get("country", {}).get("ukName", "") if isinstance(obj.get("country"), dict) else "",
-            "ownership": obj.get("ownershipType", ""),
-        })
-    return result
+    return [{"type": o.get("objectType", ""), "area": o.get("totalArea", ""),
+             "country": _uk(o, "country"), "ownership": o.get("ownershipType", "")}
+            for o in _get_step(data, 3)]
 
 
 def _parse_land(data: dict) -> list:
-    result = []
-    for obj in _get_step(data, 4):
-        result.append({
-            "area": obj.get("totalArea", ""),
-            "purpose": obj.get("intendedPurpose", ""),
-            "country": obj.get("country", {}).get("ukName", "") if isinstance(obj.get("country"), dict) else "",
-            "ownership": obj.get("ownershipType", ""),
-        })
-    return result
+    return [{"area": o.get("totalArea", ""), "purpose": o.get("intendedPurpose", ""),
+             "country": _uk(o, "country"), "ownership": o.get("ownershipType", "")}
+            for o in _get_step(data, 4)]
 
 
 def _parse_vehicles(data: dict) -> list:
-    result = []
-    for obj in _get_step(data, 6):
-        result.append({
-            "type": obj.get("objectType", ""),
-            "brand": f"{obj.get('brand', '')} {obj.get('model', '')}".strip(),
-            "year": obj.get("year", ""),
-            "country": obj.get("country", {}).get("ukName", "") if isinstance(obj.get("country"), dict) else "",
-        })
-    return result
+    return [{"type": o.get("objectType", ""), "year": o.get("year", ""),
+             "brand": f"{o.get('brand','')} {o.get('model','')}".strip(), "country": _uk(o, "country")}
+            for o in _get_step(data, 6)]
 
 
 def _parse_incomes(data: dict) -> list:
-    result = []
-    for obj in _get_step(data, 11):
-        if str(obj.get("person", "")) != "1":
-            continue
-        result.append({
-            "source": obj.get("objectType", "") or obj.get("source", ""),
-            "amount": float(obj.get("sizeIncome", 0) or 0),
-            "currency": obj.get("currency", "UAH"),
-        })
-    return result
+    return [{"source": o.get("objectType", "") or o.get("source", ""),
+             "amount": float(o.get("sizeIncome", 0) or 0), "currency": o.get("currency", "UAH")}
+            for o in _get_step(data, 11) if str(o.get("person", "")) == "1"]
 
 
 def _parse_cash(data: dict) -> list:
-    result = []
-    for obj in _get_step(data, 12):
-        result.append({
-            "bank": obj.get("organization", {}).get("ukName", "") if isinstance(obj.get("organization"), dict) else "",
-            "amount": float(obj.get("sizeAssets", 0) or 0),
-            "currency": obj.get("currency", {}).get("code", "UAH") if isinstance(obj.get("currency"), dict) else "UAH",
-        })
-    return result
+    return [{"bank": _uk(o, "organization"), "amount": float(o.get("sizeAssets", 0) or 0),
+             "currency": _code(o, "currency")}
+            for o in _get_step(data, 12)]
 
 
 def _parse_liabilities(data: dict) -> list:
-    result = []
-    for obj in _get_step(data, 13):
-        result.append({
-            "type": obj.get("objectType", ""),
-            "amount": float(obj.get("sizeAssets", 0) or 0),
-            "currency": obj.get("currency", {}).get("code", "UAH") if isinstance(obj.get("currency"), dict) else "UAH",
-        })
-    return result
+    return [{"type": o.get("objectType", ""), "amount": float(o.get("sizeAssets", 0) or 0),
+             "currency": _code(o, "currency")}
+            for o in _get_step(data, 13)]
 
 
 def _calc_total_income(data: dict) -> float:
