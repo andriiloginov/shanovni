@@ -202,25 +202,16 @@ PREMADE_QUESTIONS = [
 ]
 
 
-def render_doc_buttons(gl_text: str, council: str = "kyiv", passed: bool = True):
-    """Контейнер з назвою, саммері, кнопками та вбудованим чатом."""
-    result = find_doc(gl_text, council)
-    if not result:
-        return
-
+@st.fragment(parallel=True)
+def _render_summary_chat(result: dict, gl_text: str, passed: bool):
     num = result["legalActNum"]
     chat_key = f"chat_{hash(gl_text)}"
-
     if chat_key not in st.session_state:
         st.session_state[chat_key] = []
     messages = st.session_state[chat_key]
 
     with st.spinner("Аналізую документ..."):
         summary = get_doc_summary(result["doc_url"], result["title"])
-        try:
-            gostin = get_gostin_analysis(result["doc_url"], result["title"])
-        except Exception:
-            gostin = []
 
     col_summary, col_chat = st.columns(2)
 
@@ -284,6 +275,14 @@ def render_doc_buttons(gl_text: str, council: str = "kyiv", passed: bool = True)
                 st.session_state[chat_key] = []
                 st.rerun()
 
+
+@st.fragment(parallel=True)
+def _render_gostin(result: dict):
+    with st.spinner("Gostin аналіз..."):
+        try:
+            gostin = get_gostin_analysis(result["doc_url"], result["title"])
+        except Exception:
+            gostin = []
     if gostin:
         with st.container(border=True):
             st.write(":gray-background[Аналіз за Gostin Policy Justification Framework]")
@@ -294,6 +293,14 @@ def render_doc_buttons(gl_text: str, council: str = "kyiv", passed: bool = True)
                         st.markdown(f"**{_GOSTIN_QUESTIONS.get(item['step'], '')}**")
                         st.badge(_VERDICT_LABELS.get(item["verdict"], item["verdict"]), color=_VERDICT_COLOR.get(item["verdict"], "gray"))
                         st.caption(item["answer"])
+
+
+def render_doc_buttons(gl_text: str, council: str = "kyiv", passed: bool = True):
+    result = find_doc(gl_text, council)
+    if not result:
+        return
+    _render_summary_chat(result, gl_text, passed)
+    _render_gostin(result)
 
 
 def _liga_zakon_url(legal_act_num: str, year: int) -> str:

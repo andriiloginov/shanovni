@@ -247,14 +247,15 @@ else:
     else:
         filtered_items = sorted(filtered_items, key=lambda x: x["datetime"], reverse=True)
 
-    lim_key = ("vlim", title_search, tuple(sorted(selected_statuses)), tuple(sorted(selected_quarters)), sort_by)
-    if lim_key not in st.session_state:
-        st.session_state[lim_key] = PAGE_SIZE
-    limit = st.session_state[lim_key]
-    visible_items = filtered_items[:limit]
+    import math
+    total_pages = max(1, math.ceil(len(filtered_items) / PAGE_SIZE))
 
     st.divider()
     st.caption(f"Знайдено: {len(filtered_items)}")
+
+    page = st.pagination(total_pages, key="voting_page") if total_pages > 1 else 1
+    start = (page - 1) * PAGE_SIZE
+    visible_items = filtered_items[start:start + PAGE_SIZE]
 
     cols = st.columns(3)
     for i, item in enumerate(visible_items):
@@ -272,9 +273,3 @@ else:
                     st.session_state["scroll_top"] = True
                     st.query_params["voting"] = item["filename"]
                     st.rerun()
-
-    if len(filtered_items) > limit:
-        remaining = len(filtered_items) - limit
-        if st.button(f"Показати ще ({remaining} залишилось)"):
-            st.session_state[lim_key] += PAGE_SIZE
-            st.rerun()
