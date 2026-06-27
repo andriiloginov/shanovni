@@ -218,6 +218,8 @@ def _render_summary_chat(result: dict, gl_text: str, passed: bool):
     with col_chat.container(border=True):
         st.write(":gray-background[Чат з ШІ]")
         st.caption("Запитай, що тебе хвилює в цьому законопроєкті й цей чат допоможе тобі проаналізувати.")
+        with st.expander("ⓘ Дисклеймер"):
+            st.caption("Це не юридична консультація. Асистент пояснює рішення простими словами й допомагає скласти чернетку звернення на основі офіційних документів. Він може помилятися або неповно тлумачити документ. Перед поданням звернення чи ухваленням рішень перевіряйте першоджерело за посиланням і за потреби консультуйтеся з юристом.")
         for msg in messages:
             with st.chat_message(msg["role"]):
                 st.markdown(re.sub(r"^#{1,6}\s+", "**", msg["text"], flags=re.MULTILINE))
