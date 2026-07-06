@@ -89,7 +89,7 @@ reps_lookup = reps_df[['id', 'match_key', 'name', 'party']].rename(columns={'nam
 selected_filename = st.query_params.get("voting")
 
 if not selected_filename:
-    st.header("Результати поіменних голосувань")
+    st.header("Рішення")
 
 if selected_filename:
 

@@ -14,7 +14,7 @@ with st.sidebar:
 
 page_home = st.Page("pages/home.py", title="Головна", default=True)
 page_reps = st.Page("pages/reps.py", title="Депутати")
-page_voting = st.Page("pages/voting.py", title="Результати голосувань")
+page_voting = st.Page("pages/voting.py", title="Рішення")
 page_salaries = st.Page("pages/salaries.py", title="Зарплати")
 page_blog = st.Page("pages/blog.py", title="Блог")
 
