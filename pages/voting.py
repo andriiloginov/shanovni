@@ -188,6 +188,9 @@ if selected_filename:
     if vote_types:
         filtered_df = filtered_df[filtered_df['vote_clean'].isin(vote_types)]
 
+    unknown_count = (~votes_df['full_name'].apply(lambda n: any(c.isalpha() for c in str(n)))).sum()
+    if unknown_count:
+        st.info(f"У відкритих даних цього голосування **{unknown_count}** {'запис' if unknown_count == 1 else 'записи' if unknown_count < 5 else 'записів'} без імені депутата. Це дані КМДА, ми відображаємо їх як є.", icon=":material/info:")
     st.caption(f"Відображено депутатів: {len(filtered_df)}")
     cols = st.columns(4)
     for i, row in enumerate(filtered_df.itertuples()):
