@@ -195,7 +195,8 @@ if selected_filename:
             with st.container(border=True):
                 st.markdown(get_vote_marker(row.vote_clean), unsafe_allow_html=True)
                 deputy_avatar(int(row.id) if pd.notna(row.id) else 0, row.full_name, row.party, size=48)
-                st.write(f"**{row.full_name}**")
+                display_name = "**Невідомий депутат**" if not any(c.isalpha() for c in str(row.full_name)) else f"**{row.full_name}**"
+                st.markdown(display_name)
                 color = VOTE_COLORS.get(row.vote_clean, "#999999")
                 st.markdown(get_party_badge(row.party) + " " + get_badge(row.vote_clean, color), unsafe_allow_html=True)
 

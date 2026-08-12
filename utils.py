@@ -70,6 +70,14 @@ def _is_image_available(url: str) -> bool:
 def deputy_avatar(deputy_id: int, name: str, party: str = "", size: int = 80):
     """Аватарка депутата: фото якщо є в DEPUTY_PHOTOS, інакше — ініціали."""
     from photos import get_photo_url
+    if not any(c.isalpha() for c in str(name)):
+        st.markdown(
+            f'<div style="width:{size}px;height:{size}px;border-radius:50%;background:#9e9e9e;'
+            f'display:flex;align-items:center;justify-content:center;'
+            f'color:#fff;font-weight:700;font-size:{size // 2}px;margin-bottom:4px;">?</div>',
+            unsafe_allow_html=True,
+        )
+        return
     url = get_photo_url(deputy_id)
     parts = str(name).split()
     initials = (parts[0][0] + parts[1][0]).upper() if len(parts) >= 2 else parts[0][0].upper()
