@@ -208,7 +208,7 @@ def _render_summary_chat(result: dict, gl_text: str, passed: bool):
     col_summary, col_chat = st.columns(2)
 
     with col_summary.container(border=True):
-        st.write(":gray-background[Саммері]")
+        st.write(":material/summarize: **Короткий опис людською мовою**")
         st.write(summary)
         if passed:
             st.success(f"Рішення прийнято, [оригінал рішення {num} ↗]({result['doc_url']})")
@@ -216,10 +216,8 @@ def _render_summary_chat(result: dict, gl_text: str, passed: bool):
             st.warning(f"Рішення не прийнято, [переглянути проєкт {num} ↗]({result['doc_url']})")
 
     with col_chat.container(border=True):
-        st.write(":gray-background[Чат з ШІ]")
+        st.write(":material/smart_toy: **Чат з ШІ**")
         st.caption("Запитай, що тебе хвилює в цьому законопроєкті й цей чат допоможе тобі проаналізувати.")
-        with st.expander("ⓘ Дисклеймер"):
-            st.caption("Це не юридична консультація. Асистент пояснює рішення простими словами й допомагає скласти чернетку звернення на основі офіційних документів. Він може помилятися або неповно тлумачити документ. Перед поданням звернення чи ухваленням рішень перевіряйте першоджерело за посиланням і за потреби консультуйтеся з юристом.")
         for msg in messages:
             with st.chat_message(msg["role"]):
                 st.markdown(re.sub(r"^#{1,6}\s+", "**", msg["text"], flags=re.MULTILINE))
@@ -269,6 +267,9 @@ def _render_summary_chat(result: dict, gl_text: str, passed: bool):
                 st.session_state[chat_key] = []
                 st.rerun()
 
+        with st.expander(":material/info: Дисклеймер"):
+            st.caption("Це не юридична консультація. Асистент пояснює рішення простими словами й допомагає скласти чернетку звернення на основі офіційних документів. Він може помилятися або неповно тлумачити документ. Перед поданням звернення чи ухваленням рішень перевіряйте першоджерело за посиланням і за потреби консультуйтеся з юристом.")
+
 
 @st.fragment(parallel=True)
 def _render_gostin(result: dict):
@@ -279,7 +280,7 @@ def _render_gostin(result: dict):
             gostin = []
     if gostin:
         with st.container(border=True):
-            st.write(":gray-background[Аналіз за Gostin Policy Justification Framework]")
+            st.write(":material/balance: **Аналіз за Gostin Policy Justification Framework**")
             for n, chunk in [(3, gostin[:3]), (2, gostin[3:])]:
                 for col, item in zip(st.columns(n), chunk):
                     with col:
